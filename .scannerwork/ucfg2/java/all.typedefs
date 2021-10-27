@@ -17,13 +17,17 @@ getClass(),java.lang.Object#getClass()Ljava/lang/Class;5
 wait()java.lang.Object#wait()V*
 
 hashCode()java.lang.Object#hashCode()I
-Applicationjava.lang.Objectÿ
+Applicationjava.lang.Object©
 )com.example.csc308firstproject.CalculatorApplications
-"parseOperation(Ljava/lang/String;)Mcom.example.csc308firstproject.Calculator#parseOperation(Ljava/lang/String;)V?
+"parseOperation(Ljava/lang/String;)Mcom.example.csc308firstproject.Calculator#parseOperation(Ljava/lang/String;)VQ
+resetCalculator()<com.example.csc308firstproject.Calculator#resetCalculator()V?
 <init>()3com.example.csc308firstproject.Calculator#<init>()VS
 appendNewNumber(I)=com.example.csc308firstproject.Calculator#appendNewNumber(I)Va
 main([Ljava/lang/String;)Dcom.example.csc308firstproject.Calculator#main([Ljava/lang/String;)VW
-performOperation(ZC)?com.example.csc308firstproject.Calculator#performOperation(ZC)V 
+performOperation(ZC)?com.example.csc308firstproject.Calculator#performOperation(ZC)V=
+addPI()2com.example.csc308firstproject.Calculator#addPI()VG
+addDecimal()7com.example.csc308firstproject.Calculator#addDecimal()VM
+getPercentage():com.example.csc308firstproject.Calculator#getPercentage()V 
 EventHandlerjava.lang.Object@
 0Lcom/example/csc308firstproject/Calculator$3883;EventHandler@
 0Lcom/example/csc308firstproject/Calculator$4525;EventHandler(
