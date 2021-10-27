@@ -181,95 +181,59 @@ public class Calculator extends Application{
 
     private void parseOperation(String operator) {
         if (operator.equals("C")) {
-            onArg1 = true;
-            operatorOkay = false;
-            arg1.setLength(0);
-            arg2.setLength(0);
-            arg1.append(0);
-            arg2.append(0);
-            answer.setText("0");
+            resetCalculator();
         }
         else if (operator.equals(".")) {
-            if (onArg1) {
-                if (arg1.indexOf(".") == -1) {
-                    arg1.append(".");
-                    answer.setText(arg1.toString());
-                }
-            }
-            else {
-                if (arg2.indexOf(".") == -1) {
-                    arg2.append(".");
-                    answer.setText(arg2.toString());
-                }
-            }
-            operatorOkay = false;
+            addDecimal();
         }
         else if (operator.equals("π")) {
-            if (onArg1) {
-                arg1.setLength(0);
-                arg1.append("3.14159265359");
-                answer.setText(arg1.toString());
-            }
-            else {
-                arg2.setLength(0);
-                arg2.append("3.14159265359");
-                answer.setText(arg2.toString());
-            }
-            operatorOkay = true;
+            addPI();
         }
         else if (operator.equals("%")) {
-            if (onArg1) {
-                double newVal = Double.valueOf(arg1.toString()) * 0.01;
-                arg1.setLength(0);
-                arg1.append(newVal);
-                answer.setText(arg1.toString());
-            }
-            else {
-                double newVal = Double.valueOf(arg2.toString()) * 0.01;
-                arg2.setLength(0);
-                arg2.append(newVal);
-                answer.setText(arg2.toString());
-            }
-            operatorOkay = true;
+            getPercentage();
         }
-        else if (operatorOkay) {
-            switch(operator) {
-                case "+":
-                case "-":
-                case "x":
-                case "÷":
-                    if (onArg1) {
-                        curOperator = operator.charAt(0);
-                        onArg1 = false;
-                        resetOnNum = false;
+        else if (!operatorOkay) {
+            return;
+        }
+        switch(operator) {
+            case "+":
+            case "-":
+            case "x":
+            case "÷":
+                if (onArg1) {
+                    curOperator = operator.charAt(0);
+                    onArg1 = false;
+                    resetOnNum = false;
+                }
+                else {
+                    performOperation(false, operator.charAt(0));
+                }
+                break;
+            case "+/-":
+                if (onArg1) {
+                    if (arg1.charAt(0) == '-') {
+                        arg1.deleteCharAt(0);
                     }
                     else {
-                        performOperation(false, operator.charAt(0));
+                        arg1.insert(0, "-");
                     }
-                    break;
-                case "+/-":
-                    if (onArg1) {
-                        if (arg1.charAt(0) == '-') {
-                            arg1.deleteCharAt(0);
-                        }
-                        else {
-                            arg1.insert(0, "-");
-                        }
-                        answer.setText(arg1.toString());
+                    answer.setText(arg1.toString());
+                }
+                else {
+                    if (arg2.charAt(0) == '-') {
+                        arg2.deleteCharAt(0);
                     }
                     else {
-                        if (arg2.charAt(0) == '-') {
-                            arg2.deleteCharAt(0);
-                        }
-                        else {
-                            arg2.insert(0, "-");
-                        }
-                        answer.setText(arg2.toString());
+                        arg2.insert(0, "-");
                     }
-                    break;
-                case "=":
-                    performOperation(true, '=');
-            }
+                    answer.setText(arg2.toString());
+                }
+                break;
+            case "=":
+                performOperation(true, '=');
+                break;
+            default:
+                return;
         }
 
     }
@@ -314,6 +278,58 @@ public class Calculator extends Application{
             onArg1 = false;
             resetOnNum = false;
         }
+    }
+
+    private void resetCalculator() {
+        onArg1 = true;
+        operatorOkay = false;
+        arg1.setLength(0);
+        arg2.setLength(0);
+        arg1.append(0);
+        arg2.append(0);
+        answer.setText("0");
+    }
+
+    private void addDecimal() {
+        if (onArg1 && arg1.indexOf(".") == -1) {
+            arg1.append(".");
+            answer.setText(arg1.toString());
+        }
+        else if (arg2.indexOf(".") == -1) {
+            arg2.append(".");
+            answer.setText(arg2.toString());
+        }
+        operatorOkay = false;
+    }
+
+    private void addPI() {
+        if (onArg1) {
+            arg1.setLength(0);
+            arg1.append("3.14159265359");
+            answer.setText(arg1.toString());
+        }
+        else {
+            arg2.setLength(0);
+            arg2.append("3.14159265359");
+            answer.setText(arg2.toString());
+        }
+        operatorOkay = true;
+    }
+
+    private void getPercentage() {
+        if (onArg1) {
+            double newVal = Double.valueOf(arg1.toString()) * 0.01;
+            arg1.setLength(0);
+            arg1.append(newVal);
+            answer.setText(arg1.toString());
+        }
+        else {
+            double newVal = Double.valueOf(arg2.toString()) * 0.01;
+            arg2.setLength(0);
+            arg2.append(newVal);
+            answer.setText(arg2.toString());
+        }
+        operatorOkay = true;
     }
 
 }
