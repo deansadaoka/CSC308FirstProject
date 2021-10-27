@@ -1,0 +1,7 @@
+organization=deansadaoka
+projectKey=deansadaoka_CSC308FirstProject
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.24335
+dashboardUrl=https://sonarcloud.io/dashboard?id=deansadaoka_CSC308FirstProject
+ceTaskId=AXzBI60lt023WpAdqZm2
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXzBI60lt023WpAdqZm2
