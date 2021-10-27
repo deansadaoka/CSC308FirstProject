@@ -248,7 +248,6 @@ public class Calculator extends Application{
                     }
                     break;
                 case "+/-":
-                    System.out.println("here");
                     if (onArg1) {
                         if (arg1.charAt(0) == '-') {
                             arg1.deleteCharAt(0);
@@ -280,8 +279,8 @@ public class Calculator extends Application{
             return;
         }
 
-        double val1 = Double.valueOf(arg1.toString());
-        double val2 = Double.valueOf(arg2.toString());
+        double val1 = Double.parseDouble(arg1.toString());
+        double val2 = Double.parseDouble(arg2.toString());
 
         switch (curOperator) {
             case '+':
@@ -296,6 +295,8 @@ public class Calculator extends Application{
             case '÷':
                 val1 /= val2;
                 break;
+            default:
+                return;
         }
         arg2.setLength(0);
         arg2.append(0);
