@@ -180,54 +180,31 @@ public class Calculator extends Application{
     }
 
     private void parseOperation(String operator) {
-        if (operator.equals("C")) {
-            resetCalculator();
-        }
-        else if (operator.equals(".")) {
-            addDecimal();
-        }
-        else if (operator.equals("π")) {
-            addPI();
-        }
-        else if (operator.equals("%")) {
-            getPercentage();
-        }
-        else if (!operatorOkay) {
-            return;
+        switch (operator) {
+            case "C":
+                resetCalculator();
+                break;
+            case ".":
+                addDecimal();
+                break;
+            case "π":
+                addPI();
+                break;
+            case "%":
+                getPercentage();
+                break;
+            default:
+                if (!operatorOkay) { return; }
         }
         switch(operator) {
             case "+":
             case "-":
             case "x":
             case "÷":
-                if (onArg1) {
-                    curOperator = operator.charAt(0);
-                    onArg1 = false;
-                    resetOnNum = false;
-                }
-                else {
-                    performOperation(false, operator.charAt(0));
-                }
+                handleBasicOperator(operator.charAt(0));
                 break;
             case "+/-":
-                if (onArg1) {
-                    if (arg1.charAt(0) == '-') {
-                        arg1.deleteCharAt(0);
-                    }
-                    else {
-                        arg1.insert(0, "-");
-                    }
-                    answer.setText(arg1.toString());
-                }
-                else {
-                    if (arg2.charAt(0) == '-') {
-                        arg2.deleteCharAt(0);
-                    }
-                    else {
-                        arg2.insert(0, "-");
-                    }
-                    answer.setText(arg2.toString());
-                }
+                negateAnswer();
                 break;
             case "=":
                 performOperation(true, '=');
@@ -330,6 +307,38 @@ public class Calculator extends Application{
             answer.setText(arg2.toString());
         }
         operatorOkay = true;
+    }
+
+    private void handleBasicOperator(char operator) {
+        if (onArg1) {
+            curOperator = operator;
+            onArg1 = false;
+            resetOnNum = false;
+        }
+        else {
+            performOperation(false, operator);
+        }
+    }
+
+    private void negateAnswer() {
+        if (onArg1) {
+            if (arg1.charAt(0) == '-') {
+                arg1.deleteCharAt(0);
+            }
+            else {
+                arg1.insert(0, "-");
+            }
+            answer.setText(arg1.toString());
+        }
+        else {
+            if (arg2.charAt(0) == '-') {
+                arg2.deleteCharAt(0);
+            }
+            else {
+                arg2.insert(0, "-");
+            }
+            answer.setText(arg2.toString());
+        }
     }
 
 }
