@@ -49,6 +49,7 @@ public class Calculator extends Application{
     Button bSign;
     Button bEquals;
     Button bDecimal;
+    Button bLog10;
 
     StringBuilder arg1;
     StringBuilder arg2;
@@ -68,6 +69,7 @@ public class Calculator extends Application{
         stage.setTitle("Calculator");
 
         Font arial = Font.font("Arial", FontWeight.BOLD, 35);
+        Font smallerArial = Font.font("Arial", FontWeight.BOLD, 20);
 
         answer = new Label("0");
         answer.setMaxSize(460, 55);
@@ -105,8 +107,9 @@ public class Calculator extends Application{
         bPercent = createButton(arial, "%");
         bSign = createButton(arial, "+/-");
         bPI = createButton(arial, "π");
+        bLog10 = createButton(smallerArial, "log10");
 
-        buttonRow1 = createRow(bPI, bPercent, bSign, bC);
+        buttonRow1 = createRow(bPI, bLog10, bSign, bC);
         buttonRow2 = createRow(b7, b8, b9, bDiv);
         buttonRow3 = createRow(b4, b5, b6, bMul);
         buttonRow4 = createRow(b1, b2, b3, bMin);
@@ -192,6 +195,9 @@ public class Calculator extends Application{
                 break;
             case "%":
                 getPercentage();
+                break;
+            case "log10":
+                getLogBaseTen();
                 break;
             default:
                 if (!operatorOkay) { return; }
@@ -337,6 +343,24 @@ public class Calculator extends Application{
             else {
                 arg2.insert(0, "-");
             }
+            answer.setText(arg2.toString());
+        }
+    }
+
+    private void getLogBaseTen() {
+        double value;
+        if (onArg1) {
+            value = Double.parseDouble(arg1.toString());
+            value = Math.log10(value);
+            arg1.setLength(0);
+            arg1.append(value);
+            answer.setText(arg1.toString());
+        }
+        else {
+            value = Double.parseDouble(arg2.toString());
+            value = Math.log10(value);
+            arg2.setLength(0);
+            arg2.append(value);
             answer.setText(arg2.toString());
         }
     }
